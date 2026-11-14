@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KLIKI Laporan Marketing</title>
+  <meta name="description" content="Laporan Marketing Bulanan KLIKI (terperinci), sepadan dengan laporan PDF">
+  <meta name="theme-color" content="#0C1118">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KLIKI Laporan">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=60">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <img class="logo" src="icons/logo-white.png" alt="KLIKI" width="84" height="24">
+      <div class="ttl">
+        <span class="eyebrow">LAPORAN MARKETING</span>
+        <h1 id="page-title">Ringkasan</h1>
+      </div>
+      <div class="controls">
+        <label class="sr" for="month">Bulan</label>
+        <select id="month" aria-label="Pilih bulan"></select>
+        <button id="info" class="icon-btn" aria-label="Status data dan panduan" title="Status data">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="refresh" class="icon-btn" aria-label="Muat semula data" title="Muat semula">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs" aria-label="Halaman">
+      <div class="tg"><span class="tg-h">Bulan ini</span>
+        <button data-tab="ringkasan">Ringkasan</button>
+        <button data-tab="scorecard">Scorecard KPI</button>
+      </div>
+      <div class="tg"><span class="tg-h">Lead &amp; Walk-in</span>
+        <button data-tab="lead">Company &amp; Q4</button>
+        <button data-tab="outlet">Outlet</button>
+        <button data-tab="trend">Trend</button>
+        <button data-tab="sumber">Sumber</button>
+      </div>
+      <div class="tg"><span class="tg-h">Content &amp; Platform</span>
+        <button data-tab="content">Content</button>
+        <button data-tab="platform">Platform &amp; Traffic</button>
+        <button data-tab="iklan">Iklan</button>
+      </div>
+      <div class="tg"><span class="tg-h">Drill-down</span>
+        <button data-tab="drill">Setiap outlet</button>
+        <button data-tab="dapatan">Dapatan</button>
+      </div>
+    </nav>
+
+    <p id="status-line" class="status-line" role="status"></p>
+
+    <main id="view" tabindex="-1">
+      <div class="loading"><div class="spinner"></div><p>Memuatkan data dari Google Sheet…</p></div>
+    </main>
+
+    <footer class="foot" id="foot"><span id="foot-src">Sumber: Google Sheet KLIKI</span><span>Kliki Sdn Bhd</span></footer>
+  </div>
+
+  <dialog id="info-dlg" aria-labelledby="info-title">
+    <div class="dlg-head"><b id="info-title">Status data</b><button id="info-close" class="x" aria-label="Tutup">✕</button></div>
+    <div id="info-body"></div>
+  </dialog>
+
+  <div id="tip" class="tip" role="tooltip" hidden></div>
+
+  <script src="js/config.js?v=60"></script>
+  <script src="js/data.js?v=60"></script>
+  <script src="js/report.js?v=60"></script>
+  <script src="js/app.js?v=60"></script>
+</body>
+</html>
