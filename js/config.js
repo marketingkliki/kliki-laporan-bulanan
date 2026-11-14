@@ -14,6 +14,7 @@
       // dan Tracker Google Ads (Raxbit). Tracker asal ada spend/invois RM, jadi tidak dibaca terus (repo & site public).
       ads: '1giLL_dE7xmv93JwncUQjoR_daFjsSAYAYcMht855x94',
     },
+    adsGid: 1487455722, // tab pertama sheet Iklan Mirror
 
     // Tab dalam CONTENT SUBMIT (gid tetap, tak bergantung pada nama tab)
     tabs: {

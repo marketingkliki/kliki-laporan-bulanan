@@ -193,7 +193,7 @@
       ['walkin', S.contentSubmit, T.walkin, r => parseDaily(r, KEYS.outlet4)],
       ['linktree', S.reportContent, CFG.linktree, parseLinktree],
       ...(S.leadDetail ? [['leadDetail', S.leadDetail, CFG.leadDetail, parseLeadDetail]] : []),
-      ...(S.ads ? [['ads', S.ads, { gid: 0, range: 'A1:T400' }, parseAds]] : []),
+      ...(S.ads ? [['ads', S.ads, { gid: CFG.adsGid, range: 'A1:T400' }, parseAds]] : []),
     ];
     let done = 0;
     await Promise.all(tasks.map(async ([name, id, opts, fn]) => {
