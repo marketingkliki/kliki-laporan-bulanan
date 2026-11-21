@@ -206,3 +206,7 @@ ul.health li { padding: 3px 0; }
   .t { font-size: 12.5px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+
+/* Threads & Telegram dalam bar pecahan Total view */
+.share i.p4, .ckey i.p4 { background: #5B6472; } .share i.p5, .ckey i.p5 { background: #229ED9; }
+.ckey i.p4, .ckey i.p5 { width: 9px; height: 9px; vertical-align: -1px; display: inline-block; }

@@ -34,9 +34,9 @@
       // Telegram (channel): Date, Followers, Joined, Left, Net Growth, Views, Shares, Reactions
       telegram:    { gid: 54749228,  range: 'A1:H2000' },
     },
-    // Threads & Telegram dipapar sebagai platform tambahan dan TIDAK masuk jumlah views/engagement/follower semua
-    // platform (sasaran KPI 6M = TikTok + FB + IG + YouTube). Set true untuk campurkan dalam jumlah.
-    extraInTotal: false,
+    // Threads & Telegram ialah platform rasmi KLIKI: MASUK jumlah views / engagement / follower baru semua platform
+    // (termasuk KPI "Total view semua platform" 6M), keputusan Hafiz 21 Nov 2026. Set false untuk asingkan semula.
+    extraInTotal: true,
 
     // Tab per-post bulanan dalam REPORT CONTENT DATA. Kunci = 'YYYY-MM'.
     // Bulan baru yang belum ada di sini akan dicari ikut nama tab (lihat monthTabNames).
@@ -98,7 +98,7 @@
 
       // Peta Sumber Data seksyen 6 (14 Nov 2026): Repair dinaikkan 60k -> 100k
       buckets: { iPhone: 1400000, Android: 400000, Repair: 100000, 'Trade-in / CC': 300000 },
-      allViews: 6000000, // total view semua platform (TikTok + FB + IG + YT), ditambah 14 Nov 2026
+      allViews: 6000000, // total view semua platform (TikTok + FB + IG + YT + Threads + Telegram mulai 21 Nov 2026), ditambah 14 Nov 2026
 
       uniqueLinktree: 7000,
       ctrProfile: 17,

@@ -31,7 +31,7 @@ Semua sheet di atas mesti dikongsi **Anyone with the link → Viewer**. Tracker 
 - Warna Ach: ≥100% hijau, 80–99% kuning, <80% merah, ikut nilai dibundar (1 titik perpuluhan). Bulan berjalan: warna ikut kadar hari (hari operasi outlet untuk lead/walk-in), tanpa pengecualian "sedang naik".
 - MoM: % untuk kiraan, **pt** untuk CTR/conversion, beza mutlak untuk net follower. ▲▼ hijau = baik; lost follower / lost subscriber / kos: turun = hijau. Lead-to-walk-in tidak diwarnakan.
 - Bucket view: iPhone / Android = sub kategori itu **kecuali kategori Repair**; Repair = kategori Repair (sasaran 100k); Trade-in / C&C = Trade-in + Buyback. Tidak dijumlahkan.
-- Total view semua platform = TikTok + FB + IG + YouTube (sasaran 6M). Threads & Telegram dipapar dalam tab Platform tetapi **tidak** masuk jumlah ini (`extraInTotal: false` dalam `js/config.js`). Followers Threads/Telegram = jumlah hujung bulan; engagement Telegram = Shares + Reactions.
+- Total view semua platform = TikTok + FB + IG + YouTube + Threads + Telegram (sasaran 6M). Threads & Telegram masuk mulai 21 Nov 2026 (keputusan Hafiz; `extraInTotal: true` dalam `js/config.js`); laporan Okt 2026 yang dihantar guna 4 platform (4,091,590). Followers Threads/Telegram = jumlah hujung bulan; engagement Telegram = Shares + Reactions.
 - CTR Profile → Linktree = Linktree total view ÷ TikTok profile visit (tab **Tiktok**) × 100. Action CTR = unique click ÷ unique view × 100.
 - CTR YouTube bulanan = purata biasa CTR harian.
 - Funnel content ikut TYPE: TOFU = Educational + Trend, MOFU = POV Customer + Review, BOFU = Promo.
