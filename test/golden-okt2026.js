@@ -1,4 +1,6 @@
-// Ujian golden: angka Oktober 2026 dari enjin dashboard MESTI sama dengan Laporan Marketing Oktober 2026 (versi muktamad).
+// Ujian golden: angka Oktober 2026
+// 21 Nov 2026: Total view semua platform kini termasuk Threads & Telegram (extraInTotal) = 4,416,652; laporan Okt yang dihantar = 4,091,590 (4 platform).
+// Ujian golden asal: angka Oktober 2026 dari enjin dashboard MESTI sama dengan Laporan Marketing Oktober 2026 (versi muktamad).
 // Jalankan dalam browser selepas app dimuat: await KLIKI_GOLDEN()  → { pass, fail, skipped, results }
 (function (root) {
   root.KLIKI_GOLDEN = async function () {
@@ -15,13 +17,13 @@
     const eq = (name, got, want, skip) => out.push({ name, got, want, ok: skip ? null : got === want });
     // Scorecard (halaman 3 + 11)
     [['totalContent', 42], ['pov', 25], ['strategic', 17], ['type_Educational', 11], ['type_Trend', 3], ['type_Review', 0], ['type_Promo', 3],
-     ['subj_Buyback', 5], ['subj_Repair', 3], ['subj_Trade-in', 3], ['subj_Phone', 6], ['postViews', 1095454], ['ttViews', 3136368], ['allViews', 4091590],
+     ['subj_Buyback', 5], ['subj_Repair', 3], ['subj_Trade-in', 3], ['subj_Phone', 6], ['postViews', 1095454], ['ttViews', 3136368], ['allViews', root.KLIKI_CONFIG.extraInTotal ? 4416652 : 4091590],
      ['bucket_iPhone', 872763], ['bucket_Android', 114684], ['bucket_Repair', 108007], ['bucket_Trade-in / CC', 527537],
      ['likes', 77488], ['comments', 1225], ['shares', 4125], ['profileViews', 46112], ['newFollowers', 6439], ['netGrowth', -5617],
      ['uniqueView', 6147], ['telegram', 1931], ['wa', 3819], ['location', 464], ['leads', 1247], ['walkin', 775]].forEach(([id, v]) => eq('Actual ' + id, R(id).actual, v));
     eq('CTR Profile→Linktree', r1(R('ctrProfile').actual), 19.9); eq('Linktree Action CTR', r1(R('ctrAction').actual), 71.0); eq('Conversion', r1(R('conversion').actual), 62.1);
     eq('Ach Repair view (target 100k)', r1(R('bucket_Repair').ach), 108.0);
-    [['totalContent', 7.7], ['postViews', -6.3], ['ttViews', -17.9], ['allViews', -14.2], ['bucket_iPhone', 1.6], ['bucket_Android', -60.5], ['bucket_Repair', 451.8], ['bucket_Trade-in / CC', 1056.3], ['leads', -16.5], ['walkin', 15.2], ['uniqueView', -4.7], ['wa', 28.8]]
+    [['totalContent', 7.7], ['postViews', -6.3], ['ttViews', -17.9], ['allViews', root.KLIKI_CONFIG.extraInTotal ? -7.3 : -14.2], ['bucket_iPhone', 1.6], ['bucket_Android', -60.5], ['bucket_Repair', 451.8], ['bucket_Trade-in / CC', 1056.3], ['leads', -16.5], ['walkin', 15.2], ['uniqueView', -4.7], ['wa', 28.8]]
       .forEach(([id, v]) => eq('MoM % ' + id, r1(R(id).mom && R(id).mom.v), v));
     eq('MoM pt CTR profile', r2(R('ctrProfile').mom.v), 1.60); eq('MoM pt Action CTR', r2(R('ctrAction').mom.v), 4.69); eq('MoM pt Conversion', r2(R('conversion').mom.v), 17.10); eq('MoM net followers (mutlak)', R('netGrowth').mom.v, 34);
     eq('KPI capai (hijau)', sc.good, 8); eq('KPI hampir (kuning)', sc.warn, 3); eq('KPI bawah 80% (merah)', sc.bad, 22); eq('Jumlah KPI', sc.total, 33);
@@ -39,7 +41,7 @@
     // Content (halaman 11)
     eq('Funnel TOFU/MOFU/BOFU post', ct.funnel.map(f => f.posts).join('/'), '14/25/3'); eq('Funnel view MOFU', ct.funnel[1].views, 1024643);
     // Platform (halaman 14)
-    eq('CTR YouTube (purata biasa)', r2(pl.youtube.rows[3].actual), 6.55); eq('Linktree view', pl.linktree.views, 9181); eq('Share TikTok %', r1(pl.share[0].pct), 76.7);
+    eq('CTR YouTube (purata biasa)', r2(pl.youtube.rows[3].actual), 6.55); eq('Linktree view', pl.linktree.views, 9181); eq('Share TikTok %', r1(pl.share[0].pct), root.KLIKI_CONFIG.extraInTotal ? 71.0 : 76.7);
     eq('Lost follower turun = hijau', pl.tiktok.rows[8].momGood, true);
     // Sumber (halaman 10) — perlu sheet Iklan Mirror
     const skip = !src.hasMeta || !src.hasGoogle;
