@@ -17,7 +17,7 @@ Rujukan cara kira: *Peta Sumber Data Laporan Bulanan.md* (Drive Hafiz), seksyen 
 
 | Sheet | Untuk |
 |---|---|
-| CONTENT SUBMIT | Tab Tiktok, Facebook, Instagram, Youtube (dulu "… Insight", dibaca ikut gid), Threads & Telegram (mula Okt 2026, dibaca ikut nama tab), Supply Video V2, Customer, Before/After |
+| CONTENT SUBMIT | Tab Tiktok, Facebook, Instagram, Youtube (dulu "… Insight", dibaca ikut gid), Threads & Telegram (mula Okt 2026, gid 307219779 / 54749228), Supply Video V2, Customer, Before/After |
 | REPORT CONTENT DATA | Tab bulan (per-post) + panel pemarkahan (Google Review kumulatif), LINKTREE |
 | KLIKI Lead Walk-in Mirror (masterFRONT) | Lead & walk-in Phone/Repair/CC/Others ikut outlet, HQ |
 | KLIKI Iklan Mirror (tanpa RM) | IMPORTRANGE kolum bukan-RM dari Tracker Meta Ads (CTWA) & Tracker Google Ads (Raxbit) |
