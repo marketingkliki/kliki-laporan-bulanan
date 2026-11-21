@@ -47,7 +47,7 @@
   // ---------- nilai asas bulan ----------
   function linktree(ds, y, m) { return ds.linktree && y === CFG.linktree.year && ds.linktree[m] ? ds.linktree[m] : null; }
   function ltSum(lt, prefix) { if (!lt || !OUT.some(x => lt[prefix + x] != null)) return null; return OUT.reduce((a, x) => a + (lt[prefix + x] || 0), 0); }
-  // CTR Profile → Linktree = Linktree total view ÷ TikTok profile visit (Tiktok Insight, bukan tab LINKTREE) × 100
+  // CTR Profile → Linktree = Linktree total view ÷ TikTok profile visit (tab Tiktok, dulu "Tiktok Insight"; bukan tab LINKTREE) × 100
   function ctrProfile(ds, y, m) {
     const lt = linktree(ds, y, m), pv = KD.social(ds, y, m).tiktok.profileViews;
     if (lt && lt.ltViews != null && pv) return 100 * lt.ltViews / pv;
@@ -223,6 +223,7 @@
         cat: Object.fromEntries(CATS.map(c => [c, { lead: L.lead[c], walkin: L.walkin[c] }])),
         outlet: Object.fromEntries(OUT.map(x => [x, { lead: L.outlets[x].lead.total, walkin: L.outlets[x].walkin.total }])),
         tiktok: s.tiktok.days ? s.tiktok : null, facebook: s.facebook.days ? s.facebook : null, instagram: s.instagram.days ? s.instagram : null, youtube: s.youtube.days ? s.youtube : null,
+        threads: s.threads && s.threads.days ? s.threads : null, telegram: s.telegram && s.telegram.days ? s.telegram : null,
         lt, ltProfileCtr: lt ? ctrProfile(ds, yy, mm) : null, ltActionCtr: ctrAction(lt), ltWa: ltSum(lt, 'wa_'), ltLoc: ltSum(lt, 'loc_'),
       };
     };
@@ -358,6 +359,13 @@
         row('Interactions', g(fb, 'interactions'), g(pf, 'interactions')), row('Follow', g(fb, 'follow'), g(pf, 'follow')), { ...row('Link click', g(fb, 'linkClick'), g(pf, 'linkClick')), days: fb.daysOf && fb.daysOf.linkClick }] },
       instagram: { days: ig.days, rows: [row('View', g(ig, 'views'), g(pi, 'views')), row('Reach', g(ig, 'reach'), g(pi, 'reach')), row('Visit', g(ig, 'visit'), g(pi, 'visit')),
         row('Interactions', g(ig, 'interactions'), g(pi, 'interactions')), row('Follow', g(ig, 'follow'), g(pi, 'follow')), { ...row('Link click', g(ig, 'linkClick'), g(pi, 'linkClick')), days: ig.daysOf && ig.daysOf.linkClick }] },
+      // Threads & Telegram (tab baru Nov 2026, data mula Okt 2026). Followers = jumlah hujung bulan; tidak masuk Total view semua platform.
+      threads: { days: s.threads.days, rows: [row('Views', g(s.threads, 'views'), g(ps.threads, 'views')), row('Follows', g(s.threads, 'follows'), g(ps.threads, 'follows')),
+        row('Unfollows', g(s.threads, 'unfollows'), g(ps.threads, 'unfollows'), 'pct', true), row('Net followers', g(s.threads, 'netFollowers'), g(ps.threads, 'netFollowers'), 'abs'),
+        row('Followers (hujung bulan)', g(s.threads, 'followers'), g(ps.threads, 'followers'), 'abs')] },
+      telegram: { days: s.telegram.days, rows: [row('Views', g(s.telegram, 'views'), g(ps.telegram, 'views')), row('Shares', g(s.telegram, 'shares'), g(ps.telegram, 'shares')), row('Reactions', g(s.telegram, 'reactions'), g(ps.telegram, 'reactions')),
+        row('Joined', g(s.telegram, 'joined'), g(ps.telegram, 'joined')), row('Left', g(s.telegram, 'left'), g(ps.telegram, 'left'), 'pct', true), row('Net growth', g(s.telegram, 'netGrowth'), g(ps.telegram, 'netGrowth'), 'abs'),
+        row('Followers (hujung bulan)', g(s.telegram, 'followers'), g(ps.telegram, 'followers'), 'abs')] },
       dim: daysIn(y, m),
       allViews: kpiRow({ actual: co.views, target: T.allViews, prev: pco.views, pace: 1 }),
       share: co.plats.map(p => ({ id: p.id, name: p.name, views: p.views, pct: co.views && p.views != null ? 100 * p.views / co.views : null })),

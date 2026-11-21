@@ -13,10 +13,10 @@
     scorecard: 'REPORT CONTENT DATA, CONTENT SUBMIT, Lead Walk-in Mirror, Kemas Kini KPI Marketing',
     lead: 'KLIKI Lead Walk-in Mirror (masterFRONT), Kliki Marketing Brief Oct-Dec 2026',
     outlet: 'CONTENT SUBMIT, REPORT CONTENT DATA (LINKTREE, panel pemarkahan), Lead Walk-in Mirror',
-    trend: 'CONTENT SUBMIT (Tiktok Insight), Lead Walk-in Mirror',
+    trend: 'CONTENT SUBMIT (Tiktok), Lead Walk-in Mirror',
     sumber: 'Linktree (REPORT CONTENT DATA), Tracker Meta Ads & Google Ads (Iklan Mirror), Lead Walk-in Mirror',
     content: 'REPORT CONTENT DATA (tab bulan), CONTENT SUBMIT, Content Schedule',
-    platform: 'CONTENT SUBMIT (Insight), REPORT CONTENT DATA (LINKTREE)',
+    platform: 'CONTENT SUBMIT (Tiktok, Facebook, Instagram, Youtube, Threads, Telegram), REPORT CONTENT DATA (LINKTREE)',
     iklan: 'Tracker Meta Ads (CTWA) & Tracker Google Ads (Raxbit) melalui Iklan Mirror, tanpa RM',
     drill: 'Semua sumber, satu outlet', dapatan: 'Dikira dari Scorecard KPI bulan ini',
   };
@@ -353,7 +353,7 @@
     let h = head(y, m);
     h += sec(`Prestasi Platform, ${monLabel(y, m)}`, `${MON[m - 1]} lawan ${MON[pm - 1]}`);
     const pt = (name, o) => `<div class="card"><h4>${name} <small>${o.days}/${p.dim} hari data</small></h4>${table(['Metrik', MON[pm - 1], MON[m - 1], 'MoM'], o.rows.map(r => tr([esc(r.label) + (r.days != null && r.actual != null && r.days < p.dim ? ` <small class="mute">(${r.days} hari)</small>` : ''), r.unit === '%' ? P(r.prev, 2) : N(r.prev), r.unit === '%' ? P(r.actual, 2) : N(r.actual), mom(r.mom, r.momGood)])), { cls: 'dense' })}</div>`;
-    h += `<div class="grid2">${pt('TikTok', p.tiktok)}${pt('YouTube', p.youtube)}${pt('Facebook', p.facebook)}${pt('Instagram', p.instagram)}</div>`;
+    h += `<div class="grid2">${pt('TikTok', p.tiktok)}${pt('YouTube', p.youtube)}${pt('Facebook', p.facebook)}${pt('Instagram', p.instagram)}${p.threads.days ? pt('Threads', p.threads) : ''}${p.telegram.days ? pt('Telegram', p.telegram) : ''}</div>`;
     const av = p.allViews;
     h += `<div class="card"><div class="st-top"><span class="lbl">TOTAL VIEW SEMUA PLATFORM</span>${pill(av)}</div><div class="num big">${N(av.actual)} <small>sasaran ${N(av.target)} · vs ${MON[pm - 1]} ${momR(av)}</small></div>
       <div class="share">${p.share.map((s, i) => `<i class="p${i}" style="width:${(s.pct || 0).toFixed(2)}%"></i>`).join('')}</div><div class="ckey">${p.share.map((s, i) => `<span><i class="p${i}"></i>${s.name} <b>${P(s.pct)}</b></span>`).join('')}</div></div>`;
@@ -371,10 +371,10 @@
     h += table(['Klik', MON[pm - 1], MON[m - 1], 'MoM', 'Sasaran', 'Ach', `Lead direkod ${MON[m - 1]}`], [
       ...L.clicks.map(r => tr([esc(r.label), N(r.prev), N(r.actual), momR(r), r.target == null ? '-' : N(r.target), r.target == null ? '-' : pill(r, 0), recLead(r)])),
       tr(['<b>Jumlah WhatsApp</b>', N(waSum('prev')), N(waSum('actual')), mom(KR.change(waSum('actual'), waSum('prev'))), '6,000*', pill(KR.kpiRow({ actual: L.clicks.filter(r => KR.OUT.includes(r.key)).reduce((a, r) => a + (r.actual || 0), 0), target: 6000 }), 0), N(lc.lead.total + (lc.hq.online || 0) + (lc.hq.buyback || 0))], 'tot')]);
-    h += noteP('Platform dari CONTENT SUBMIT (Insight); klik dari REPORT CONTENT DATA (LINKTREE). * Sasaran WhatsApp 1,500 setiap outlet (4 outlet sahaja; HQ tiada sasaran), Ach pada 4 outlet. Lead direkod datang daripada semua sumber, jadi tidak dibahagi dengan klik. CTR YouTube bulanan = purata CTR harian. Lost follower / subscriber: turun = hijau.');
+    h += noteP('Platform dari CONTENT SUBMIT (tab Tiktok, Facebook, Instagram, Youtube, Threads, Telegram); Threads & Telegram (mula Okt 2026) tidak masuk Total view semua platform (sasaran 6M = TikTok + FB + IG + YT), followers = jumlah hujung bulan; klik dari REPORT CONTENT DATA (LINKTREE). * Sasaran WhatsApp 1,500 setiap outlet (4 outlet sahaja; HQ tiada sasaran), Ach pada 4 outlet. Lead direkod datang daripada semua sumber, jadi tidak dibahagi dengan klik. CTR YouTube bulanan = purata CTR harian. Lost follower / subscriber: turun = hijau.');
     // Trend setiap platform (halaman 15 - 19)
     h += sec('Trend platform', `${y} lawan ${y - 1}`);
-    const tabs = [['tiktok', 'TikTok'], ['facebook', 'Facebook'], ['instagram', 'Instagram'], ['youtube', 'YouTube'], ['linktree', 'Linktree']];
+    const tabs = [['tiktok', 'TikTok'], ['facebook', 'Facebook'], ['instagram', 'Instagram'], ['youtube', 'YouTube'], ['threads', 'Threads'], ['telegram', 'Telegram'], ['linktree', 'Linktree']];
     h += `<div class="chips" role="tablist">${tabs.map(([k, n]) => `<button role="tab" data-plat="${k}" aria-selected="${state.plat === k}">${n}</button>`).join('')}</div>`;
     h += platTrend(y, m);
     return h;
@@ -386,13 +386,16 @@
       facebook: [['views', 'View'], ['reach', 'Reach'], ['visit', 'Visit'], ['interactions', 'Interactions'], ['follow', 'Follow'], ['linkClick', 'Link click']],
       instagram: [['views', 'View'], ['reach', 'Reach'], ['visit', 'Visit'], ['interactions', 'Interactions'], ['follow', 'Follow'], ['linkClick', 'Link click']],
       youtube: [['views', 'View'], ['watchHours', 'Watch time (jam)'], ['impressions', 'Impressions'], ['ctr', 'CTR (%)'], ['newSubs', 'New subscriber'], ['lostSubs', 'Lost subscriber'], ['netSubs', 'Net subscriber']],
+      threads: [['views', 'Views'], ['follows', 'Follows'], ['unfollows', 'Unfollows'], ['netFollowers', 'Net followers'], ['followers', 'Followers (hujung bulan)']],
+      telegram: [['views', 'Views'], ['shares', 'Shares'], ['reactions', 'Reactions'], ['joined', 'Joined'], ['left', 'Left'], ['netGrowth', 'Net growth'], ['followers', 'Followers (hujung bulan)']],
       linktree: [['ltViews', 'Linktree view'], ['uniqueClicks', 'Unique view'], ['uniqueClick', 'Unique click'], ['ltProfileCtr', 'CTR profile (%)'], ['ltActionCtr', 'Action CTR (%)'], ['ltWa', 'WhatsApp 4 outlet'], ['ltLoc', 'Lokasi 4 outlet'], ['telegram', 'Telegram']],
     }[k];
     const get = (r, f) => k === 'linktree' ? (['ltProfileCtr', 'ltActionCtr', 'ltWa', 'ltLoc'].includes(f) ? r[f] : r.lt ? r.lt[f] ?? null : null) : r[k] ? r[k][f] ?? null : null;
     const cut = (arr) => arr.map((v, i) => i + 1 > m ? null : v);
-    const ly = k !== 'linktree';
+    const ly = !['linktree', 'threads', 'telegram'].includes(k);
     let h = `<div class="grid2">${DEF.map(([f, label]) => `<div class="card"><h4>${label}</h4>${lineChart([{ name: String(y), values: cut(M.cur.map(r => get(r, f))) }, ...(ly ? [{ name: String(y - 1), values: M.ly.map(r => get(r, f)) }] : [])], { hl: m, h: 160, cols: 2, pct: /ctr/i.test(f), aria: label })}</div>`).join('')}</div>`;
     h += table(['Metrik', ...MON.slice(0, m)], DEF.map(([f, label]) => tr([label, ...M.cur.slice(0, m).map(r => { const v = get(r, f); return /ctr/i.test(f) ? P(v, 2) : N(v); })])), { cls: 'dense wide' });
+    if (k === 'threads' || k === 'telegram') h += noteP('Data tab ' + (k === 'threads' ? 'Threads' : 'Telegram') + ' bermula 1 Okt 2026, jadi tiada perbandingan tahun lepas.');
     if (k === 'linktree') h += noteP('Tab LINKTREE disimpan untuk tahun ' + CFG.linktree.year + ' sahaja.');
     return h;
   }
@@ -466,7 +469,7 @@
   // ---------- info ----------
   function fillInfo() {
     const ds = state.ds; if (!ds) return;
-    const names = { tiktok: 'Tiktok Insight', facebook: 'Facebook Insight', instagram: 'Instagram Insight', youtube: 'Youtube Insight', supply: 'Supply Video V2', beforeAfter: 'Before/After', customer: 'Customer', leadDetail: 'Lead Walk-in Mirror (masterFRONT)', linktree: 'LINKTREE', ads: 'Iklan Mirror (Meta + Google, tanpa RM)' };
+    const names = { tiktok: 'Tiktok', facebook: 'Facebook', instagram: 'Instagram', youtube: 'Youtube', threads: 'Threads', telegram: 'Telegram', supply: 'Supply Video V2', beforeAfter: 'Before/After', customer: 'Customer', leadDetail: 'Lead Walk-in Mirror (masterFRONT)', linktree: 'LINKTREE', ads: 'Iklan Mirror (Meta + Google, tanpa RM)' };
     const li = Object.entries(names).map(([k, n]) => { const s = ds.sources[k]; if (!s) return ''; return `<li><span class="${s.ok ? 'ok' : 'no'}">${s.ok ? '●' : '✕'}</span> ${n}: ${s.ok ? s.rows + ' baris' : esc(s.error)}</li>`; }).join('');
     $('#info-body').innerHTML = `<ul class="health">${li}</ul><p class="health">Dimuat ${new Date(ds.loadedAt).toLocaleString('ms-MY')}. Data dibaca terus dari Google Sheet setiap kali app dibuka.</p>
       <p class="health">Warna Ach: ≥100% hijau, 80 - 99% kuning, bawah 80% merah (nilai dibundar). Bulan berjalan: warna ikut kadar hari operasi (garis menegak pada bar). ▲▼ hijau = baik, merah = buruk; lost follower / subscriber turun = hijau.</p>`;

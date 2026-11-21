@@ -17,7 +17,7 @@ Rujukan cara kira: *Peta Sumber Data Laporan Bulanan.md* (Drive Hafiz), seksyen 
 
 | Sheet | Untuk |
 |---|---|
-| CONTENT SUBMIT | Insight TikTok/FB/IG/YouTube, Supply Video V2, Customer, Before/After |
+| CONTENT SUBMIT | Tab Tiktok, Facebook, Instagram, Youtube (dulu "… Insight", dibaca ikut gid), Threads & Telegram (mula Okt 2026, dibaca ikut nama tab), Supply Video V2, Customer, Before/After |
 | REPORT CONTENT DATA | Tab bulan (per-post) + panel pemarkahan (Google Review kumulatif), LINKTREE |
 | KLIKI Lead Walk-in Mirror (masterFRONT) | Lead & walk-in Phone/Repair/CC/Others ikut outlet, HQ |
 | KLIKI Iklan Mirror (tanpa RM) | IMPORTRANGE kolum bukan-RM dari Tracker Meta Ads (CTWA) & Tracker Google Ads (Raxbit) |
@@ -31,8 +31,8 @@ Semua sheet di atas mesti dikongsi **Anyone with the link → Viewer**. Tracker 
 - Warna Ach: ≥100% hijau, 80–99% kuning, <80% merah, ikut nilai dibundar (1 titik perpuluhan). Bulan berjalan: warna ikut kadar hari (hari operasi outlet untuk lead/walk-in), tanpa pengecualian "sedang naik".
 - MoM: % untuk kiraan, **pt** untuk CTR/conversion, beza mutlak untuk net follower. ▲▼ hijau = baik; lost follower / lost subscriber / kos: turun = hijau. Lead-to-walk-in tidak diwarnakan.
 - Bucket view: iPhone / Android = sub kategori itu **kecuali kategori Repair**; Repair = kategori Repair (sasaran 100k); Trade-in / C&C = Trade-in + Buyback. Tidak dijumlahkan.
-- Total view semua platform = TikTok + FB + IG + YouTube (sasaran 6M).
-- CTR Profile → Linktree = Linktree total view ÷ TikTok profile visit (**Tiktok Insight**) × 100. Action CTR = unique click ÷ unique view × 100.
+- Total view semua platform = TikTok + FB + IG + YouTube (sasaran 6M). Threads & Telegram dipapar dalam tab Platform tetapi **tidak** masuk jumlah ini (`extraInTotal: false` dalam `js/config.js`). Followers Threads/Telegram = jumlah hujung bulan; engagement Telegram = Shares + Reactions.
+- CTR Profile → Linktree = Linktree total view ÷ TikTok profile visit (tab **Tiktok**) × 100. Action CTR = unique click ÷ unique view × 100.
 - CTR YouTube bulanan = purata biasa CTR harian.
 - Funnel content ikut TYPE: TOFU = Educational + Trend, MOFU = POV Customer + Review, BOFU = Promo.
 - Klik WhatsApp (tab Sumber) = Linktree + Meta CTWA chat + GBP chat. Call = Google Ads call + GBP call. Arah = Google Ads + GBP + Linktree lokasi.

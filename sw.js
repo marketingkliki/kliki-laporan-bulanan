@@ -1,7 +1,7 @@
 // Service worker: simpan app shell untuk buka laju & offline. Data Google Sheet sentiasa dari network.
 // Prefix 'kliki-lap-' supaya tidak memadam cache KLIKI Marketing Dashboard (origin klikidotmy.github.io sama)
-const CACHE = 'kliki-lap-shell-v1';
-const SHELL = ['./', 'index.html', 'styles.css?v=60', 'js/config.js?v=60', 'js/data.js?v=60', 'js/report.js?v=60', 'js/app.js?v=60', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/logo-white.png'];
+const CACHE = 'kliki-lap-shell-v2';
+const SHELL = ['./', 'index.html', 'styles.css?v=61', 'js/config.js?v=61', 'js/data.js?v=61', 'js/report.js?v=61', 'js/app.js?v=61', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/logo-white.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('kliki-lap-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
